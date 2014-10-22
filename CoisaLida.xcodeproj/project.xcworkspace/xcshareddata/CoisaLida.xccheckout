@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D4499627-7D84-4555-AA4E-EFB1F72CA977</string>
+	<key>IDESourceControlProjectName</key>
+	<string>CoisaLida</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>B15B4FA4-7E2A-4759-9C5F-C0D33A1289D0</key>
+		<string>https://github.com/kylemcdonald/ofxCv.git</string>
+		<key>CAC7B35C-39EA-4BC3-A1CA-4D8C972476B5</key>
+		<string>https://github.com/astellato/ofxSyphon.git</string>
+		<key>CFE420C8-FF26-4BBA-BC7D-C6F4CA1845CB</key>
+		<string>https://bitbucket.org/radames/interactive-blocks.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>openFrameworks/coisa_lida/CoisaLida.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>B15B4FA4-7E2A-4759-9C5F-C0D33A1289D0</key>
+		<string>../../../../../openFrameworks/addons/ofxCv</string>
+		<key>CAC7B35C-39EA-4BC3-A1CA-4D8C972476B5</key>
+		<string>../../../../../openFrameworks/addons/ofxSyphon</string>
+		<key>CFE420C8-FF26-4BBA-BC7D-C6F4CA1845CB</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://bitbucket.org/radames/interactive-blocks.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>CFE420C8-FF26-4BBA-BC7D-C6F4CA1845CB</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CFE420C8-FF26-4BBA-BC7D-C6F4CA1845CB</string>
+			<key>IDESourceControlWCCName</key>
+			<string>cl</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>B15B4FA4-7E2A-4759-9C5F-C0D33A1289D0</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxCv</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>CAC7B35C-39EA-4BC3-A1CA-4D8C972476B5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxSyphon</string>
+		</dict>
+	</array>
+</dict>
+</plist>

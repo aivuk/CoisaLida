@@ -1,0 +1,58 @@
+<Settings>
+	<Kinect>
+		<Far_Threshold>143</Far_Threshold>
+		<Offset_X>0</Offset_X>
+		<Offset_Y>0</Offset_Y>
+	<Num_Max_Blos>15</Num_Max_Blos>
+		<min_Blob_Size>22</min_Blob_Size>
+		<max_Blob_Size>354</max_Blob_Size>
+	<Mouse_DEBUG>0</Mouse_DEBUG>
+	<Width>640</Width>
+		<Height>480</Height>
+	</Kinect>
+	<Shapes/>
+<Settings/>
+<Morphs>
+		<size>10</size>
+		<number>2</number>
+		<position>1248, 480</position>
+		<color>127, 127, 127, 255</color>
+	<bar_width_min>220.408</bar_width_min>
+		<bar_width_max>400</bar_width_max>
+	<max_Rand_Points>26</max_Rand_Points>
+		<min_Rand_Points>7</min_Rand_Points>
+		<mix_Noise_Corner>12</mix_Noise_Corner>
+		<man_Rand_Points>41</man_Rand_Points>
+	<min_Noise_Corner>13</min_Noise_Corner>
+		<max_Noise_Corne>34</max_Noise_Corne>
+	</Morphs>
+<Gradient>
+		<min_Width>0.255102</min_Width>
+		<max_Width>2.01531</max_Width>
+		<lower_Color>255, 255, 255, 255</lower_Color>
+		<higher_Color>0, 0, 0, 255</higher_Color>
+	<time_per_frame>10</time_per_frame>
+		<size_change_per_level>0.0306122</size_change_per_level>
+		<animation_speed>5</animation_speed>
+		<animation_max_time>3</animation_max_time>
+	</Gradient>
+	<Bars>
+		<bar_width_min>54.3878</bar_width_min>
+		<bar_width_max>194.949</bar_width_max>
+	</Bars>
+	<Spikes>
+		<min_Rand_Points>4</min_Rand_Points>
+		<max_Rand_Points>30</max_Rand_Points>
+		<min_num>5</min_num>
+		<max_num>13</max_num>
+	</Spikes>
+<Mouse_DEBUG>1</Mouse_DEBUG>
+	<general>
+		<min_Noise_Corner>18</min_Noise_Corner>
+		<max_Noise_Corne>48</max_Noise_Corne>
+	</general>
+<General_Params>
+		<min_Noise_Corner>17</min_Noise_Corner>
+		<max_Noise_Corne>77</max_Noise_Corne>
+	</General_Params>
+</Settings>
