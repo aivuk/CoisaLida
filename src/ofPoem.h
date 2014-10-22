@@ -8,6 +8,7 @@
 
 #ifndef CoisaLida_ofPoem_h
 #define CoisaLida_ofPoem_h
+
 #include "ofMain.h"
 
 class ofPoem {
@@ -21,10 +22,13 @@ public:
     void update();
     void setup(std::string text);
     void draw(int screen);
+    void drawText();
     ofColor color;
     vector<string> text;
     FrameType script;
     string videoInfo;
+    ofTrueTypeFont font;
+
 };
 
 

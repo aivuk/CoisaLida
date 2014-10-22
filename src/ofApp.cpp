@@ -28,6 +28,13 @@ void ofApp::setup() {
     player.play();
 
     tempFbo.allocate(mCanvas.width, mCanvas.height);
+    
+    // Create poems
+    string poem = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR, SABER VER QUANDO SE V E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
+    ofPoem newPoem;
+    newPoem.setup(poem);
+    poems.push_back(newPoem);
+    cout << poems[0].text[0];
 }
 
 //--------------------------------------------------------------
@@ -73,6 +80,8 @@ void ofApp::draw() {
     if(bDebugMode){ debugMode(); }//draw debug mode
 
     //player.draw(37, 259);
+    
+    /*
     tempFbo.begin();
         ofBackground(0);
         player.draw(0, 0, mCanvas.getWidth(), mCanvas.getHeight());
@@ -80,7 +89,9 @@ void ofApp::draw() {
     tempFbo.readToPixels(mCanvas.getPixelsRef());
 
     mCanvas.reloadTexture();
-    toPanels(mCanvas, mPanels);
+    toPanels(mCanvas, mPanels); */
+    
+    poems[0].drawText();
 
     syphonServer.publishScreen(); //syphon screen
 
