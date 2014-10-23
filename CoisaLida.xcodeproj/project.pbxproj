@@ -49,6 +49,10 @@
 		BBAB23CB13894F3D00AA2426 /* GLUT.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BBAB23BE13894E4700AA2426 /* GLUT.framework */; };
 		D31F5C1B140C59B2AF1533A8 /* registration.c in Sources */ = {isa = PBXBuildFile; fileRef = 71958293AC5292DE4B7C619D /* registration.c */; };
 		D3301F6A0B43BB293ED97C1D /* ofxCvShortImage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A4DD23693DFAB8EC05FAA5D /* ofxCvShortImage.cpp */; };
+		D739E8DC19F76A74004806FD /* ofxTrueTypeFontUC.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D739E8D819F76A74004806FD /* ofxTrueTypeFontUC.cpp */; };
+		D739E90D19F9AFF8004806FD /* ofTextConverter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D739E90519F9AFF8004806FD /* ofTextConverter.cpp */; };
+		D739E90E19F9AFF8004806FD /* ofUnicode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D739E90719F9AFF8004806FD /* ofUnicode.cpp */; };
+		D739E90F19F9AFF8004806FD /* ofUTF8.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D739E90919F9AFF8004806FD /* ofUTF8.cpp */; };
 		D787851D19F47A38000836DE /* ofApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D787851C19F47A38000836DE /* ofApp.cpp */; };
 		D787851F19F47A3D000836DE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D787851E19F47A3D000836DE /* main.cpp */; };
 		D787852719F73064000836DE /* ofPoem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D787852619F73064000836DE /* ofPoem.cpp */; };
@@ -259,6 +263,30 @@
 		D097EE679E29AD7B5E2CDFCD /* flags.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = flags.h; path = ../../../openFrameworks/addons/ofxKinect/libs/libfreenect/src/flags.h; sourceTree = SOURCE_ROOT; };
 		D5A3AFF36064B2CACAD31716 /* composite_index.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = composite_index.h; path = ../../../openFrameworks/addons/ofxOpenCv/libs/opencv/include/opencv2/flann/composite_index.h; sourceTree = SOURCE_ROOT; };
 		D5BB6F0357B6422E1B1656B4 /* ofxCvColorImage.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ofxCvColorImage.h; path = ../../../openFrameworks/addons/ofxOpenCv/src/ofxCvColorImage.h; sourceTree = SOURCE_ROOT; };
+		D739E8D319F76A74004806FD /* install.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = install.xml; sourceTree = "<group>"; };
+		D739E8D419F76A74004806FD /* License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
+		D739E8D519F76A74004806FD /* ofxaddons_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ofxaddons_thumbnail.png; sourceTree = "<group>"; };
+		D739E8D619F76A74004806FD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		D739E8D819F76A74004806FD /* ofxTrueTypeFontUC.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTrueTypeFontUC.cpp; sourceTree = "<group>"; };
+		D739E8D919F76A74004806FD /* ofxTrueTypeFontUC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTrueTypeFontUC.h; sourceTree = "<group>"; };
+		D739E8DE19F9AFF8004806FD /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		D739E8F419F9AFF8004806FD /* checked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checked.h; sourceTree = "<group>"; };
+		D739E8F519F9AFF8004806FD /* core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core.h; sourceTree = "<group>"; };
+		D739E8F619F9AFF8004806FD /* unchecked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unchecked.h; sourceTree = "<group>"; };
+		D739E8F719F9AFF8004806FD /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
+		D739E8FB19F9AFF8004806FD /* ReleaseNotes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReleaseNotes; sourceTree = "<group>"; };
+		D739E8FC19F9AFF8004806FD /* utf8cpp.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = utf8cpp.html; sourceTree = "<group>"; };
+		D739E8FF19F9AFF8004806FD /* checked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = checked.h; sourceTree = "<group>"; };
+		D739E90019F9AFF8004806FD /* core.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = core.h; sourceTree = "<group>"; };
+		D739E90119F9AFF8004806FD /* unchecked.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = unchecked.h; sourceTree = "<group>"; };
+		D739E90219F9AFF8004806FD /* utf8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utf8.h; sourceTree = "<group>"; };
+		D739E90319F9AFF8004806FD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		D739E90519F9AFF8004806FD /* ofTextConverter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofTextConverter.cpp; sourceTree = "<group>"; };
+		D739E90619F9AFF8004806FD /* ofTextConverter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofTextConverter.h; sourceTree = "<group>"; };
+		D739E90719F9AFF8004806FD /* ofUnicode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofUnicode.cpp; sourceTree = "<group>"; };
+		D739E90819F9AFF8004806FD /* ofUnicode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofUnicode.h; sourceTree = "<group>"; };
+		D739E90919F9AFF8004806FD /* ofUTF8.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofUTF8.cpp; sourceTree = "<group>"; };
+		D739E90A19F9AFF8004806FD /* ofUTF8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofUTF8.h; sourceTree = "<group>"; };
 		D76A59E7B3601E76351C9BDB /* cvaux.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = cvaux.h; path = ../../../openFrameworks/addons/ofxOpenCv/libs/opencv/include/opencv/cvaux.h; sourceTree = SOURCE_ROOT; };
 		D787851B19F47A30000836DE /* ofApp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
 		D787851C19F47A38000836DE /* ofApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofApp.cpp; sourceTree = "<group>"; };
@@ -282,7 +310,7 @@
 		E45BE9770E8CC7DD009D7055 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		E45BE9790E8CC7DD009D7055 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
 		E45BE97A0E8CC7DD009D7055 /* QuickTime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickTime.framework; path = /System/Library/Frameworks/QuickTime.framework; sourceTree = "<absolute>"; };
-		E4B69B5B0A3A1756003C02F2 /* CoisaLidaDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoisaLidaDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4B69B5B0A3A1756003C02F2 /* CoisaLida.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = CoisaLida.app; path = /Users/walrus/cl/openFrameworks/coisa_lida/bin/CoisaLida.app; sourceTree = "<absolute>"; };
 		E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text.plist.xml; path = "openFrameworks-Info.plist"; sourceTree = "<group>"; };
 		E4C2424410CC5A17004149E2 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		E4C2424510CC5A17004149E2 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
@@ -819,6 +847,8 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				D739E8DD19F9AFF8004806FD /* ofxUnicode */,
+				D739E8CD19F76A74004806FD /* ofxTrueTypeFontUC */,
 				5104D19119D8D341002EB372 /* ofxCv */,
 				5104D16719D8675A002EB372 /* ofxGui */,
 				5101F7A419D78A6600E8AD90 /* ofxSyphon */,
@@ -899,6 +929,134 @@
 			name = objdetect;
 			sourceTree = "<group>";
 		};
+		D739E8CD19F76A74004806FD /* ofxTrueTypeFontUC */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8D319F76A74004806FD /* install.xml */,
+				D739E8D419F76A74004806FD /* License.txt */,
+				D739E8D519F76A74004806FD /* ofxaddons_thumbnail.png */,
+				D739E8D619F76A74004806FD /* README.md */,
+				D739E8D719F76A74004806FD /* src */,
+			);
+			name = ofxTrueTypeFontUC;
+			path = ../../../openFrameworks/addons/ofxTrueTypeFontUC;
+			sourceTree = "<group>";
+		};
+		D739E8D719F76A74004806FD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8D819F76A74004806FD /* ofxTrueTypeFontUC.cpp */,
+				D739E8D919F76A74004806FD /* ofxTrueTypeFontUC.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		D739E8DD19F9AFF8004806FD /* ofxUnicode */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8DE19F9AFF8004806FD /* .gitignore */,
+				D739E8F019F9AFF8004806FD /* libs */,
+				D739E90319F9AFF8004806FD /* README.md */,
+				D739E90419F9AFF8004806FD /* src */,
+			);
+			name = ofxUnicode;
+			path = ../../../openFrameworks/addons/ofxUnicode;
+			sourceTree = "<group>";
+		};
+		D739E8F019F9AFF8004806FD /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8F119F9AFF8004806FD /* utf8cpp */,
+			);
+			path = libs;
+			sourceTree = "<group>";
+		};
+		D739E8F119F9AFF8004806FD /* utf8cpp */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8F219F9AFF8004806FD /* include */,
+				D739E8F819F9AFF8004806FD /* src */,
+			);
+			path = utf8cpp;
+			sourceTree = "<group>";
+		};
+		D739E8F219F9AFF8004806FD /* include */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8F319F9AFF8004806FD /* utf8 */,
+				D739E8F719F9AFF8004806FD /* utf8.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		D739E8F319F9AFF8004806FD /* utf8 */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8F419F9AFF8004806FD /* checked.h */,
+				D739E8F519F9AFF8004806FD /* core.h */,
+				D739E8F619F9AFF8004806FD /* unchecked.h */,
+			);
+			path = utf8;
+			sourceTree = "<group>";
+		};
+		D739E8F819F9AFF8004806FD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8F919F9AFF8004806FD /* utf8_v2_3_1 */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		D739E8F919F9AFF8004806FD /* utf8_v2_3_1 */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8FA19F9AFF8004806FD /* doc */,
+				D739E8FD19F9AFF8004806FD /* source */,
+			);
+			path = utf8_v2_3_1;
+			sourceTree = "<group>";
+		};
+		D739E8FA19F9AFF8004806FD /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8FB19F9AFF8004806FD /* ReleaseNotes */,
+				D739E8FC19F9AFF8004806FD /* utf8cpp.html */,
+			);
+			path = doc;
+			sourceTree = "<group>";
+		};
+		D739E8FD19F9AFF8004806FD /* source */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8FE19F9AFF8004806FD /* utf8 */,
+				D739E90219F9AFF8004806FD /* utf8.h */,
+			);
+			path = source;
+			sourceTree = "<group>";
+		};
+		D739E8FE19F9AFF8004806FD /* utf8 */ = {
+			isa = PBXGroup;
+			children = (
+				D739E8FF19F9AFF8004806FD /* checked.h */,
+				D739E90019F9AFF8004806FD /* core.h */,
+				D739E90119F9AFF8004806FD /* unchecked.h */,
+			);
+			path = utf8;
+			sourceTree = "<group>";
+		};
+		D739E90419F9AFF8004806FD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				D739E90519F9AFF8004806FD /* ofTextConverter.cpp */,
+				D739E90619F9AFF8004806FD /* ofTextConverter.h */,
+				D739E90719F9AFF8004806FD /* ofUnicode.cpp */,
+				D739E90819F9AFF8004806FD /* ofUnicode.h */,
+				D739E90919F9AFF8004806FD /* ofUTF8.cpp */,
+				D739E90A19F9AFF8004806FD /* ofUTF8.h */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
 		DCC60D6724B56635AE867535 /* libs */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,7 +1091,6 @@
 				E4EEC9E9138DF44700A80321 /* openFrameworks */,
 				BB4B014C10F69532006C3DED /* addons */,
 				E45BE5980E8CC70C009D7055 /* frameworks */,
-				E4B69B5B0A3A1756003C02F2 /* CoisaLidaDebug.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1028,7 +1185,7 @@
 			);
 			name = CoisaLida;
 			productName = myOFApp;
-			productReference = E4B69B5B0A3A1756003C02F2 /* CoisaLidaDebug.app */;
+			productReference = E4B69B5B0A3A1756003C02F2 /* CoisaLida.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1103,6 +1260,7 @@
 				5101F7D819D78A6600E8AD90 /* ofxSyphonServerDirectory.mm in Sources */,
 				E55DEEF784A10419E444669E /* flags.c in Sources */,
 				FCC16AB16073FF0581F50ED7 /* loader.c in Sources */,
+				D739E90D19F9AFF8004806FD /* ofTextConverter.cpp in Sources */,
 				21A059755481CC0BF969FD2D /* keep_alive.c in Sources */,
 				5101F7D419D78A6600E8AD90 /* SyphonNameboundClient.m in Sources */,
 				5104D4AD19D8D349002EB372 /* Distance.cpp in Sources */,
@@ -1120,6 +1278,8 @@
 				5104D4B319D8D349002EB372 /* Tracker.cpp in Sources */,
 				5101F7D719D78A6600E8AD90 /* ofxSyphonServer.mm in Sources */,
 				5104D17F19D8675A002EB372 /* ofxSlider.cpp in Sources */,
+				D739E8DC19F76A74004806FD /* ofxTrueTypeFontUC.cpp in Sources */,
+				D739E90E19F9AFF8004806FD /* ofUnicode.cpp in Sources */,
 				5104D4B019D8D349002EB372 /* Kalman.cpp in Sources */,
 				5104D18119D8675A002EB372 /* ofxToggle.cpp in Sources */,
 				5104D17A19D8675A002EB372 /* ofxBaseGui.cpp in Sources */,
@@ -1128,6 +1288,7 @@
 				5104D4B519D8D349002EB372 /* Wrappers.cpp in Sources */,
 				D787851F19F47A3D000836DE /* main.cpp in Sources */,
 				5101F7D619D78A6600E8AD90 /* ofxSyphonClient.mm in Sources */,
+				D739E90F19F9AFF8004806FD /* ofUTF8.cpp in Sources */,
 				FB09C6B2A1DA0EA217240CB8 /* ofxCvGrayscaleImage.cpp in Sources */,
 				5104D4AA19D8D349002EB372 /* fdog.cpp in Sources */,
 				5104D4A919D8D349002EB372 /* ETF.cpp in Sources */,

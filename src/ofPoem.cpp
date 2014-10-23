@@ -9,6 +9,9 @@
 #include "ofPoem.h"
 #include "ofMain.h"
 #include "ofApp.h"
+#include "ofUTF8.h"
+#include "ofUnicode.h"
+#include "ofTextConverter.h"
 #include <sstream>
 #include <string>
 
@@ -19,20 +22,35 @@ void ofPoem::setup(std::string _text) {
          back_inserter(text));
     
     // Get font from ofApp
-    font = ((ofApp*)ofGetAppPtr())->helvetica;
+    font = &((ofApp*)ofGetAppPtr())->helvetica;
+    word_i = 0;
 
 }
 
+void ofPoem::update() {
+    unsigned long long now = ofGetElapsedTimeMillis();
+    if (now - wordTime > 500) {
+        wordTime = now;
+        word_i = (word_i + 1) % text.size();
+    }
+}
+
 void ofPoem::drawText() {
-    char c;
-    string s = text[2];
-    cout << s;
+    drawWord(text[word_i], 400, 259);
+}
+
+void ofPoem::drawWord(string word, int x, int y) {
+    ofUTF8Ptr iter = ofUTF8::beginPtr(word);
+    ofUTF8Ptr stop = ofUTF8::endPtr(word);
     ofRectangle r;
-    for(unsigned int i = 0; i < s.length(); i++) {
-        int dx;
-        c = s[i];
-        r = font.getStringBoundingBox(string(&c), 400, 259 + i*14);
+    int dx;
+    int i = 0;
+    while (iter != stop) {
+        ofUniChar c = ofUTF8::getNext(iter);
+        
+        r = font->getStringBoundingBox(ofTextConverter::toUTF8(c), 400, 259 + i*20);
         dx = (14 - r.getWidth())/2;
-        font.drawString(string(&c), 400, 259 + i*14);
+        font->drawString(ofTextConverter::toUTF8(c), x + dx, y + i*20);
+        ++i;
     }
 }

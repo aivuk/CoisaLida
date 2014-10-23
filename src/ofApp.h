@@ -7,6 +7,7 @@
 #include "ofxSyphon.h"
 #include "ofxGui.h"
 #include "ofPoem.h"
+#include "ofxTrueTypeFontUC.h"
 
 class ofApp : public ofBaseApp {
 public:
@@ -70,7 +71,8 @@ public:
     ofParameter<int> minBlobSize = 22;
     ofParameter<int> maxBlobSize = 354;
 
-    ofTrueTypeFont helvetica;
+    ofxTrueTypeFontUC helvetica;
+
     ofVideoPlayer player;
     vector<ofPoem> poems;
     

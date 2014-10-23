@@ -10,6 +10,7 @@
 #define CoisaLida_ofPoem_h
 
 #include "ofMain.h"
+#include "ofxTrueTypeFontUC.h"
 
 class ofPoem {
     
@@ -23,11 +24,14 @@ public:
     void setup(std::string text);
     void draw(int screen);
     void drawText();
+    void drawWord(string word, int x, int y);
     ofColor color;
     vector<string> text;
     FrameType script;
     string videoInfo;
-    ofTrueTypeFont font;
+    ofxTrueTypeFontUC *font;
+    unsigned long long wordTime;
+    int word_i;
 
 };
 

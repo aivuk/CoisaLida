@@ -1,5 +1,6 @@
 #include "ofApp.h"
 #include "ofxSyphon.h"
+#include "ofxTrueTypeFontUC.h"
 
 using namespace cv;
 using namespace ofxCv;
@@ -24,13 +25,14 @@ void ofApp::setup() {
     fiespMask.loadImage("SP_Urban_MASK_025.png");
 
 	helvetica.loadFont("HelveticaNeueLTStd-Hv.otf", 14);
+
     player.loadMovie("aviao2.mp4");
     player.play();
 
     tempFbo.allocate(mCanvas.width, mCanvas.height);
     
     // Create poems
-    string poem = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR, SABER VER QUANDO SE V E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
+    string poem = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR, SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
     ofPoem newPoem;
     newPoem.setup(poem);
     poems.push_back(newPoem);
@@ -43,6 +45,7 @@ void ofApp::update() {
     ofEnableAlphaBlending();
 	ofBackground(255, 255, 255);
   //  kinectUpdate();
+    poems[0].update();
     player.update();
 
 
