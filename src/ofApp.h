@@ -75,6 +75,7 @@ public:
     bool running = true;
     ofVideoPlayer player;
     vector<ofPoem> poems;
+    int runningPoem = 0;
     
     //options variables
     bool bDebugMode = true;

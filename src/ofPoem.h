@@ -25,6 +25,9 @@ public:
     void draw(int screen);
     void drawText();
     void drawWord(string word);
+    void advanceWord();
+    void backWord();
+    
     ofColor color;
     vector<string> text;
     FrameType script;

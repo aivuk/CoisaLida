@@ -39,6 +39,18 @@ void ofPoem::drawText() {
     drawWord(text[word_i]);
 }
 
+void ofPoem::advanceWord() {
+    word_i = (word_i + 1) % text.size();
+}
+
+void ofPoem::backWord() {
+    if (word_i != text.size() - 1) {
+        word_i = (word_i - 1) % text.size();
+    } else {
+        word_i = 0;
+    }
+}
+
 void ofPoem::drawWord(string word) {
     ofRectangle r;
     int i = 0;

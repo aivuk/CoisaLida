@@ -46,7 +46,7 @@ void ofApp::update() {
     kinectUpdate();
     
     if (running) {
-        poems[0].update();
+        poems[runningPoem].update();
         player.update();
     }
 
@@ -86,7 +86,7 @@ void ofApp::draw() {
     mCanvas.reloadTexture();
     toPanels(mCanvas, mPanels); */
     
-    poems[0].drawText();
+    poems[runningPoem].drawText();
 
     syphonServer.publishScreen(); //syphon screen
 
@@ -360,7 +360,14 @@ void ofApp::keyPressed (int key) {
             bDebugMode = !bDebugMode;
             break;
    
-
+        case 'n':
+            running = false;
+            poems[runningPoem].backWord();
+            break;
+        case 'm':
+            running = false;
+            poems[runningPoem].advanceWord();
+            break;
 	}
 
 
