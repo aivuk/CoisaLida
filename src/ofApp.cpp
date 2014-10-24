@@ -12,7 +12,6 @@ void ofApp::setup() {
     
     screenSetup(); //screen and some OF setups
     kinectSetup(); //kinetic setup
-
     guiSetup(); //GUI Setup
     
     
@@ -27,12 +26,12 @@ void ofApp::setup() {
 	helvetica.loadFont("HelveticaNeueLTStd-Hv.otf", 14);
 
     player.loadMovie("aviao2.mp4");
-    player.play();
+   // player.play();
 
     tempFbo.allocate(mCanvas.width, mCanvas.height);
     
     // Create poems
-    string poem = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR, SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
+    string poem = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
     ofPoem newPoem;
     newPoem.setup(poem);
     poems.push_back(newPoem);
@@ -44,25 +43,15 @@ void ofApp::update() {
 
     ofEnableAlphaBlending();
 	ofBackground(255, 255, 255);
-  //  kinectUpdate();
-    poems[0].update();
-    player.update();
-
-
-}
-
-void ofApp::drawWord(string s, int char_size, int x, int y) {
-    char c;
-    ofRectangle r;
-    for(unsigned int i = 0; i < s.length(); i++) {
-        int dx;
-        c = s[i];
-        r = helvetica.getStringBoundingBox(string(&c), 400, 259 + i*char_size);
-        dx = (14 - r.getWidth())/2;
-        cout << c << " " << dx << " " << r.x << endl;
-        helvetica.drawString(string(&c), 400 + dx, 259 + i*char_size);
+    kinectUpdate();
+    
+    if (running) {
+        poems[0].update();
+        player.update();
     }
+
 }
+
 
 //--------------------------------------------------------------
 void ofApp::draw() {
@@ -75,12 +64,15 @@ void ofApp::draw() {
     ofDrawBitmapStringHighlight(ofToString(ofGetFrameRate()), 10,10, ofColor(255,0,255), ofColor(255,255,0));
     
     fiespMask.draw(0,0);
-    mPanels.draw(mPanelPositionAndSize.x,mPanelPositionAndSize.y);
+    //mPanels.draw(mPanelPositionAndSize.x, mPanelPositionAndSize.y);
     
+    /*ofPushStyle();
+    ofSetColor(255,0,0);
+    ofRect(mPanelPositionAndSize.x, mPanelPositionAndSize.y, mPanelPositionAndSize.width, mPanelPositionAndSize.height);
+    ofPopStyle();*/
     
-   // drawWord("Ver", 14, 400, 259);
-    
-    if(bDebugMode){ debugMode(); }//draw debug mode
+    if (bDebugMode)
+        debugMode();
 
     //player.draw(37, 259);
     
@@ -108,8 +100,6 @@ void ofApp::drawText() {
 
 void ofApp::debugMode(){
 
-
-
     ofPushMatrix();
 
         ofTranslate(400,400);
@@ -120,7 +110,6 @@ void ofApp::debugMode(){
             ofPushMatrix();
                 ofTranslate(kinect.width/2,kinect.height/2);
                 ofPushStyle();
-                //drawing the actual kinect area, used to the positions calculation inside de morphrender funciton
                 ofSetRectMode(OF_RECTMODE_CENTER);
                 ofSetColor(255,0,0,100);
                 ofFill();
@@ -196,7 +185,6 @@ void ofApp::debugMode(){
     gui.draw();
 
     
-    
     ofFbo tempFbo;
     tempFbo.allocate(mCanvas.width, mCanvas.height);
     tempFbo.begin();
@@ -248,8 +236,6 @@ void ofApp::toPanels(ofImage &canvas, ofImage &panels){
 void ofApp::exit() {
 	kinect.setCameraTiltAngle(0); // zero the tilt on exit
 	kinect.close();
-
-
 }
 
 void ofApp::screenSetup(){
@@ -366,7 +352,9 @@ void ofApp::guiSetup(){
 void ofApp::keyPressed (int key) {
 	switch (key) {
 
-
+        case ' ':
+            running = !running;
+            break;
 
         case 'd':
             bDebugMode = !bDebugMode;

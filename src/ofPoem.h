@@ -24,7 +24,7 @@ public:
     void setup(std::string text);
     void draw(int screen);
     void drawText();
-    void drawWord(string word, int x, int y);
+    void drawWord(string word);
     ofColor color;
     vector<string> text;
     FrameType script;
@@ -32,7 +32,7 @@ public:
     ofxTrueTypeFontUC *font;
     unsigned long long wordTime;
     int word_i;
-
+    ofRectangle *mPanelPositionAndSize;
 };
 
 

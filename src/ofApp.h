@@ -72,7 +72,7 @@ public:
     ofParameter<int> maxBlobSize = 354;
 
     ofxTrueTypeFontUC helvetica;
-
+    bool running = true;
     ofVideoPlayer player;
     vector<ofPoem> poems;
     
