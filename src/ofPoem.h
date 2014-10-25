@@ -16,7 +16,8 @@
 enum FrameType {
     WORD,
     KINECT,
-    VIDEO
+    VIDEO,
+    STOP
 };
 
 

@@ -39,7 +39,7 @@ void ofPoem::update() {
         case WORD:
             if (now - wordTime > 500) {
                 wordTime = now;
-                word_i = (word_i + 1) % text.size();
+                advanceWord();
                 played = false;
             }
             break;
@@ -56,11 +56,14 @@ void ofPoem::update() {
             if (!scriptVideo[word_i].isPlaying()) {
                 scriptVideo[word_i].setLoopState(OF_LOOP_NONE);
                 scriptVideo[word_i].play();
+                scriptVideo[word_i].update();
             } else {
                 scriptVideo[word_i].update();
             }
             break;
         case KINECT:
+            break;
+        case STOP:
             break;
     }
 }
@@ -79,6 +82,9 @@ void ofPoem::drawVideo() {
 
 void ofPoem::advanceWord() {
     word_i = (word_i + 1) % text.size();
+    if (word_i == 0) {
+        frame = STOP;
+    }
 }
 
 void ofPoem::backWord() {
@@ -108,6 +114,8 @@ void ofPoem::draw() {
             drawVideo();
             break;
         case KINECT:
+            break;
+        case STOP:
             break;
     }
 }
@@ -140,7 +148,6 @@ void ofPoem::drawWord(string word) {
         }
         ++i;
     }
-    cout << char_width[char_min] << " " << char_width[char_max] << endl;
     
     // Draw the letter
     i = 0;
@@ -150,6 +157,7 @@ void ofPoem::drawWord(string word) {
         ofPushStyle();
         ofSetColor(255);
         //cout << ofTextConverter::toUTF8(c) << " " << r.getWidth() << endl ;
+
         // Left
         font->drawString(ofTextConverter::toUTF8(c), 0, (mPanelPositionAndSize->height - word_height)/2 + 14 + i*17);
         

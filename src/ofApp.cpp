@@ -33,12 +33,15 @@ void ofApp::setup() {
     //tempFbo.allocate(mCanvas.width, mCanvas.height);
     
     // Create poems
+    
+    // Poem 1: Alberto Caeiro (F. Pessoa)
     string poemText = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
     ofPoem newPoem;
     newPoem.setup(poemText);
-    newPoem.addScript(5, VIDEO, "poema-1/s-coisas caindo_a.mov");
-    newPoem.addScript(7, VIDEO, "poema-1/s-Luz piscando.mov");
-
+    newPoem.addScript(5, VIDEO, "poema-1/s-sombrinha caindo2.mov");
+    newPoem.addScript(7, VIDEO, "poema-1/s-coisas caindo_b.mov");
+    newPoem.addScript(17, VIDEO, "poema-1/s-Luz piscando.mov");
+    newPoem.addScript(20, VIDEO, "poema-1/s-retalhos caindo4.mov");
     poems.push_back(newPoem);
 
 }
