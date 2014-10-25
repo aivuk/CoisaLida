@@ -30,8 +30,9 @@ void ofPoem::setup(std::string _text) {
 
 void ofPoem::update() {
     unsigned long long now = ofGetElapsedTimeMillis();
-    if (script.count(word_i) > 0) {
+    if (script.count(word_i) > 0 && !played) {
         frame = script[word_i];
+        played = false;
     }
     
     switch (frame) {
@@ -39,14 +40,16 @@ void ofPoem::update() {
             if (now - wordTime > 500) {
                 wordTime = now;
                 word_i = (word_i + 1) % text.size();
+                played = false;
             }
             break;
         case VIDEO:
             if (scriptVideo[word_i].getIsMovieDone()) {
                 scriptVideo[word_i].stop();
                 scriptVideo[word_i].setFrame(0);
-                word_i = (word_i + 1) % text.size();
                 frame = WORD;
+                wordTime = now;
+                played = true;
                 return;
             }
             
@@ -55,8 +58,6 @@ void ofPoem::update() {
                 scriptVideo[word_i].play();
             } else {
                 scriptVideo[word_i].update();
-                cout <<scriptVideo[word_i].getIsMovieDone() << endl;
-
             }
             break;
         case KINECT:

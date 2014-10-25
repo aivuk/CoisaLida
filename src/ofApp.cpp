@@ -33,14 +33,14 @@ void ofApp::setup() {
     //tempFbo.allocate(mCanvas.width, mCanvas.height);
     
     // Create poems
-    string poem = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
+    string poemText = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
     ofPoem newPoem;
-    newPoem.setup(poem);
-    newPoem.addScript(5, VIDEO, "aviao2.mp4");
-    poems.push_back(newPoem);
-    cout << poems[0].text[0];
+    newPoem.setup(poemText);
+    newPoem.addScript(5, VIDEO, "poema-1/s-coisas caindo_a.mov");
+    newPoem.addScript(7, VIDEO, "poema-1/s-Luz piscando.mov");
 
-    
+    poems.push_back(newPoem);
+
 }
 
 //--------------------------------------------------------------

@@ -46,6 +46,7 @@ public:
     int word_i;
     FrameType frame = WORD;
     
+    bool played = false;
     ofImage *mCanvas, *mPanels;
     ofRectangle *mPanelPositionAndSize;
     tr1::unordered_map<int, FrameType> script;
