@@ -34,16 +34,36 @@ void ofApp::setup() {
     
     // Create poems
     
+    ofPoem poem1, poem2, poem3;
+    
     // Poem 1: Alberto Caeiro (F. Pessoa)
     string poemText = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
-    ofPoem newPoem;
-    newPoem.setup(poemText);
-    newPoem.addScript(5, VIDEO, "poema-1/s-sombrinha caindo2.mov");
-    newPoem.addScript(7, VIDEO, "poema-1/s-coisas caindo_b.mov");
-    newPoem.addScript(17, VIDEO, "poema-1/s-Luz piscando.mov");
-    newPoem.addScript(20, VIDEO, "poema-1/s-retalhos caindo4.mov");
-    poems.push_back(newPoem);
+    poem1.setup(poemText);
+    poem1.addScript(4, VIDEO, "poema-1/s-sombrinha caindo2.mov");
+    poem1.addScript(6, VIDEO, "poema-1/s-coisas caindo_b.mov");
+    poem1.addScript(15, VIDEO, "poema-1/s-Luz piscando.mov");
+    poem1.addScript(18, VIDEO, "poema-1/s-retalhos caindo4.mov");
+    poem1.addScript(26, KINECT);
+    poems.push_back(poem1);
+    
+    // Poem 2: Joãozito Pereira apud Paul Virilio
+    poemText = "A VELOCIDADE É O CEGAMENTO QUANTO MAIS VELOCIDADE MAIS A PAISAGEM VIRA PASSAGEM";
+    poem2.addScript(4, VIDEO, "poema-2/s-SOLDA SPARK.mov");
+    poem2.addScript(7, VIDEO, "poema-2/s-Tesla Coil_continuo5.mov");
+    poem2.addScript(12, KINECT);
+    poem2.setup(poemText);
+    poems.push_back(poem2);
 
+    // Poem 3: Pierre Clastres
+    poemText = "ALGUMA COISA EXISTE NA AUSÊNCIA PERCEBER É SUBTRAIR";
+    poem3.setup(poemText);
+    poem3.addScript(2, VIDEO, "poema-3/s-TV liga desliga3.mov");
+    poem3.addScript(4, KINECT);
+    poem3.addScript(7, VIDEO, "poema-3/s-Luz piscando.mov");
+    poems.push_back(poem3);
+    
+    // Start poem 1
+    poems[0].start();
 }
 
 //--------------------------------------------------------------
@@ -54,12 +74,18 @@ void ofApp::update() {
     kinectUpdate();
     
     if (running) {
+        if (poems[runningPoem].frame == STOP) {
+            advancePoem();
+        }
         poems[runningPoem].update();
-        player.update();
     }
 
 }
 
+void ofApp::advancePoem() {
+    runningPoem = (runningPoem + 1) % poems.size();
+    poems[runningPoem].start();
+}
 
 //--------------------------------------------------------------
 void ofApp::draw() {
@@ -100,9 +126,6 @@ void ofApp::draw() {
 
 }
 
-void ofApp::drawText() {
-    
-}
 
 ///DEBUG-MODE
 
@@ -208,6 +231,22 @@ void ofApp::debugMode(){
     toPanels(mCanvas, mPanels);*/
 
 
+}
+
+void ofApp::drawKinect() {
+    ofFbo tempFbo;
+    tempFbo.allocate(mCanvas.width, mCanvas.height);
+    tempFbo.begin();
+    ofBackground(0);
+    //ofSetColor(20,20,200);
+    //ofFill();
+    //ofRect(ofGetMouseX(),ofGetMouseY(),100,100);
+    grayImage.draw(0,0,mCanvas.width,mCanvas.height);
+    tempFbo.end();
+    tempFbo.readToPixels(mCanvas.getPixelsRef());
+    
+    mCanvas.reloadTexture();
+    toPanels(mCanvas, mPanels);
 }
 
 void ofApp::drawToPanels(ofFbo toDraw, bool connect) {

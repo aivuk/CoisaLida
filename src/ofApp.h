@@ -17,9 +17,9 @@ public:
 	void draw();
 	void exit();
 	
+    void drawKinect();
 	void drawPointCloud();
-	void drawText();
-    void drawWord(string s, int char_size, int x, int y);
+    void advancePoem();
 	void keyPressed(int key);
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);

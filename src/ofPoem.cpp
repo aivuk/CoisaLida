@@ -28,19 +28,25 @@ void ofPoem::setup(std::string _text) {
     word_i = 0;
 }
 
+void ofPoem::start() {
+    wordTime = ofGetElapsedTimeMillis();
+    frame = WORD;
+}
+
 void ofPoem::update() {
     unsigned long long now = ofGetElapsedTimeMillis();
-    if (script.count(word_i) > 0 && !played) {
-        frame = script[word_i];
-        played = false;
-    }
+
     
     switch (frame) {
         case WORD:
-            if (now - wordTime > 500) {
-                wordTime = now;
-                advanceWord();
-                played = false;
+            if (now - wordTime > 100) {
+                if (script.count(word_i) > 0) {
+                    frame = script[word_i];
+                    wordTime = now;
+                    return;
+                } else {
+                    advanceWord();
+                }
             }
             break;
         case VIDEO:
@@ -49,7 +55,7 @@ void ofPoem::update() {
                 scriptVideo[word_i].setFrame(0);
                 frame = WORD;
                 wordTime = now;
-                played = true;
+                advanceWord();
                 return;
             }
             
@@ -62,6 +68,11 @@ void ofPoem::update() {
             }
             break;
         case KINECT:
+            if (now - wordTime > 10000) {
+                wordTime = now;
+                played = true;
+                advanceWord();
+            }
             break;
         case STOP:
             break;
@@ -82,8 +93,11 @@ void ofPoem::drawVideo() {
 
 void ofPoem::advanceWord() {
     word_i = (word_i + 1) % text.size();
+    wordTime = ofGetElapsedTimeMillis();
     if (word_i == 0) {
         frame = STOP;
+    } else {
+        frame = WORD;
     }
 }
 
@@ -114,6 +128,7 @@ void ofPoem::draw() {
             drawVideo();
             break;
         case KINECT:
+            ((ofApp*)ofGetAppPtr())->drawKinect();
             break;
         case STOP:
             break;

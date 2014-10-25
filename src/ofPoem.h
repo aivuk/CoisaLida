@@ -31,13 +31,14 @@ class ofPoem {
 public:
     void update();
     void setup(std::string text);
+    void start();
     void draw();
     void drawText();
     void drawWord(string word);
     void drawVideo();
     void advanceWord();
     void backWord();
-    void addScript(int i, FrameType f, string video_info = NULL);
+    void addScript(int i, FrameType f, string video_info = "");
     
     ofColor color;
     vector<string> text;
@@ -45,7 +46,7 @@ public:
     ofxTrueTypeFontUC *font;
     unsigned long long wordTime;
     int word_i;
-    FrameType frame = WORD;
+    FrameType frame = STOP;
     
     bool played = false;
     ofImage *mCanvas, *mPanels;
