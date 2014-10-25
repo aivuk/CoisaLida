@@ -24,19 +24,56 @@ void ofPoem::setup(std::string _text) {
     // Get font from ofApp
     font = &((ofApp*)ofGetAppPtr())->helvetica;
     mPanelPositionAndSize = &((ofApp*)ofGetAppPtr())->mPanelPositionAndSize;
+    tempFbo.allocate(mPanelPositionAndSize->width, mPanelPositionAndSize->height);
     word_i = 0;
 }
 
 void ofPoem::update() {
     unsigned long long now = ofGetElapsedTimeMillis();
-    if (now - wordTime > 500) {
-        wordTime = now;
-        word_i = (word_i + 1) % text.size();
+    if (script.count(word_i) > 0) {
+        frame = script[word_i];
+    }
+    
+    switch (frame) {
+        case WORD:
+            if (now - wordTime > 500) {
+                wordTime = now;
+                word_i = (word_i + 1) % text.size();
+            }
+            break;
+        case VIDEO:
+            if (scriptVideo[word_i].getIsMovieDone()) {
+                scriptVideo[word_i].stop();
+                scriptVideo[word_i].setFrame(0);
+                word_i = (word_i + 1) % text.size();
+                frame = WORD;
+                return;
+            }
+            
+            if (!scriptVideo[word_i].isPlaying()) {
+                scriptVideo[word_i].setLoopState(OF_LOOP_NONE);
+                scriptVideo[word_i].play();
+            } else {
+                scriptVideo[word_i].update();
+                cout <<scriptVideo[word_i].getIsMovieDone() << endl;
+
+            }
+            break;
+        case KINECT:
+            break;
     }
 }
 
 void ofPoem::drawText() {
     drawWord(text[word_i]);
+}
+
+void ofPoem::drawVideo() {    
+    tempFbo.begin();
+    ofBackground(0);
+    scriptVideo[word_i].draw(0, 0, mPanelPositionAndSize->getWidth(), mPanelPositionAndSize->getHeight());
+    tempFbo.end();
+    ((ofApp*)ofGetAppPtr())->drawToPanels(tempFbo, true);
 }
 
 void ofPoem::advanceWord() {
@@ -51,6 +88,29 @@ void ofPoem::backWord() {
     }
 }
 
+void ofPoem::addScript(int i, FrameType f, string video_info) {
+    script.insert(std::make_pair<int, FrameType>(i, f));
+    
+    if (f == VIDEO) {
+        ofVideoPlayer video;
+        video.loadMovie(video_info);
+        scriptVideo.insert(std::make_pair<int, ofVideoPlayer>(i, video));
+    }
+}
+
+void ofPoem::draw() {
+    switch (frame) {
+        case WORD:
+            drawWord(text[word_i]);
+            break;
+        case VIDEO:
+            drawVideo();
+            break;
+        case KINECT:
+            break;
+    }
+}
+
 void ofPoem::drawWord(string word) {
     ofRectangle r;
     int i = 0;
@@ -62,9 +122,14 @@ void ofPoem::drawWord(string word) {
     // Find the biggest letter
     ofUTF8Ptr iter = ofUTF8::beginPtr(word);
     ofUTF8Ptr stop = ofUTF8::endPtr(word);
+
+    tempFbo.begin();
+    ofBackground(0);
+    
+    
     while (iter != stop) {
         ofUniChar c = ofUTF8::getNext(iter);
-        r = font->getStringBoundingBox(ofTextConverter::toUTF8(c), mPanelPositionAndSize->width/2 + mPanelPositionAndSize->x, mPanelPositionAndSize->y + i*17);
+        r = font->getStringBoundingBox(ofTextConverter::toUTF8(c), mPanelPositionAndSize->width/2, i*17);
         char_width[i] = r.getWidth();
         if (char_width[i] < char_width[char_min]) {
             char_min = i;
@@ -82,19 +147,21 @@ void ofPoem::drawWord(string word) {
     while (iter != stop) {
         ofUniChar c = ofUTF8::getNext(iter);
         ofPushStyle();
-        ofSetColor(0, 0, 0);
+        ofSetColor(255);
         //cout << ofTextConverter::toUTF8(c) << " " << r.getWidth() << endl ;
         // Left
-        font->drawString(ofTextConverter::toUTF8(c), mPanelPositionAndSize->x + (char_width[char_max] - char_width[i])/2, mPanelPositionAndSize->y + (mPanelPositionAndSize->height - word_height)/2 + 14 + i*17);
+        font->drawString(ofTextConverter::toUTF8(c), 0, (mPanelPositionAndSize->height - word_height)/2 + 14 + i*17);
         
         // Center
-        font->drawString(ofTextConverter::toUTF8(c), mPanelPositionAndSize->width/2 + mPanelPositionAndSize->x - char_width[i]/2.0, mPanelPositionAndSize->y + (mPanelPositionAndSize->height - word_height)/2 + 10 + i*17);
-        
+        font->drawString(ofTextConverter::toUTF8(c), mPanelPositionAndSize->width/2 - char_width[i]/2.0, (mPanelPositionAndSize->height - word_height)/2 + 10 + i*17);
         
         // Right
-        font->drawString(ofTextConverter::toUTF8(c), mPanelPositionAndSize->x + mPanelPositionAndSize->width - char_width[char_max], mPanelPositionAndSize->y + (mPanelPositionAndSize->height - word_height)/2 + 14 + i*17);
+        font->drawString(ofTextConverter::toUTF8(c), mPanelPositionAndSize->width - char_width[char_max], (mPanelPositionAndSize->height - word_height)/2 + 14 + i*17);
         ofPopStyle();
 
         ++i;
     }
+    tempFbo.end();
+    ((ofApp*)ofGetAppPtr())->drawToPanels(tempFbo);
+
 }

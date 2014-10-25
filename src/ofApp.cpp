@@ -1,6 +1,7 @@
 #include "ofApp.h"
 #include "ofxSyphon.h"
 #include "ofxTrueTypeFontUC.h"
+#include <tr1/unordered_map>
 
 using namespace cv;
 using namespace ofxCv;
@@ -18,24 +19,28 @@ void ofApp::setup() {
     mPanelPositionAndSize = ofRectangle(37,259, 215, 168);
     mCanvas.allocate(mPanelPositionAndSize.width, mPanelPositionAndSize.height, OF_IMAGE_COLOR);
     mPanels.allocate(mPanelPositionAndSize.width, mPanelPositionAndSize.height, OF_IMAGE_COLOR);
+    mCanvas.setColor(ofColor(0));
     mPanels.setColor(ofColor(0));
     panelsMask.loadImage("SP_Urban_MASK_025.png");
     panelsMask.crop(mPanelPositionAndSize.x, mPanelPositionAndSize.y, mPanelPositionAndSize.width, mPanelPositionAndSize.height);
     fiespMask.loadImage("SP_Urban_MASK_025.png");
-
+    
 	helvetica.loadFont("HelveticaNeueLTStd-Hv.otf", 14);
 
     player.loadMovie("aviao2.mp4");
    // player.play();
 
-    tempFbo.allocate(mCanvas.width, mCanvas.height);
+    //tempFbo.allocate(mCanvas.width, mCanvas.height);
     
     // Create poems
     string poem = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
     ofPoem newPoem;
     newPoem.setup(poem);
+    newPoem.addScript(5, VIDEO, "aviao2.mp4");
     poems.push_back(newPoem);
     cout << poems[0].text[0];
+
+    
 }
 
 //--------------------------------------------------------------
@@ -64,7 +69,7 @@ void ofApp::draw() {
     ofDrawBitmapStringHighlight(ofToString(ofGetFrameRate()), 10,10, ofColor(255,0,255), ofColor(255,255,0));
     
     fiespMask.draw(0,0);
-    //mPanels.draw(mPanelPositionAndSize.x, mPanelPositionAndSize.y);
+    mPanels.draw(mPanelPositionAndSize.x, mPanelPositionAndSize.y);
     
     /*ofPushStyle();
     ofSetColor(255,0,0);
@@ -86,7 +91,7 @@ void ofApp::draw() {
     mCanvas.reloadTexture();
     toPanels(mCanvas, mPanels); */
     
-    poems[runningPoem].drawText();
+    poems[runningPoem].draw();
 
     syphonServer.publishScreen(); //syphon screen
 
@@ -184,7 +189,7 @@ void ofApp::debugMode(){
     ofPopStyle();
     gui.draw();
 
-    
+    /*
     ofFbo tempFbo;
     tempFbo.allocate(mCanvas.width, mCanvas.height);
     tempFbo.begin();
@@ -197,15 +202,27 @@ void ofApp::debugMode(){
     tempFbo.readToPixels(mCanvas.getPixelsRef());
 
     mCanvas.reloadTexture();
-    toPanels(mCanvas, mPanels);
+    toPanels(mCanvas, mPanels);*/
 
 
+}
+
+void ofApp::drawToPanels(ofFbo toDraw, bool connect) {
+    if (connect) {
+        toDraw.readToPixels(mCanvas.getPixelsRef());
+        mCanvas.reloadTexture();
+        toPanels(mCanvas, mPanels);
+    } else {
+        toDraw.readToPixels(mPanels.getPixelsRef());
+        mPanels.reloadTexture();
+    }
 }
 
 void ofApp::toPanels(ofImage &canvas, ofImage &panels){
     if((canvas.getWidth() < panels.getWidth()) || (canvas.getHeight() < panels.getHeight()))
         return;
     
+
     for(int y=0; y<panels.getHeight(); y++){
         int leftOffset=0, rightOffset=0;
         int gapSize = max(0, (int)((0.0-74.0)/mPanels.getHeight()*y+72.0));
@@ -227,6 +244,7 @@ void ofApp::toPanels(ofImage &canvas, ofImage &panels){
                 rightOffset = 1;
             }
         }
+        
     }
     panels.reloadTexture();
 }

@@ -11,31 +11,46 @@
 
 #include "ofMain.h"
 #include "ofxTrueTypeFontUC.h"
+#include <tr1/unordered_map>
+
+enum FrameType {
+    WORD,
+    KINECT,
+    VIDEO
+};
+
+
+struct poemScript {
+    int word_idx;
+    FrameType frame;
+};
 
 class ofPoem {
     
 public:
-    enum FrameType{
-        KINECT,
-        VIDEO
-    };
-    
     void update();
     void setup(std::string text);
-    void draw(int screen);
+    void draw();
     void drawText();
     void drawWord(string word);
+    void drawVideo();
     void advanceWord();
     void backWord();
+    void addScript(int i, FrameType f, string video_info = NULL);
     
     ofColor color;
     vector<string> text;
-    FrameType script;
     string videoInfo;
     ofxTrueTypeFontUC *font;
     unsigned long long wordTime;
     int word_i;
+    FrameType frame = WORD;
+    
+    ofImage *mCanvas, *mPanels;
     ofRectangle *mPanelPositionAndSize;
+    tr1::unordered_map<int, FrameType> script;
+    tr1::unordered_map<int, ofVideoPlayer> scriptVideo;
+    ofFbo tempFbo;
 };
 
 

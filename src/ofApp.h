@@ -31,7 +31,7 @@ public:
     void kinectSetup();
     void kinectUpdate();
     void debugMode();
-    
+    void drawToPanels(ofFbo toDraw, bool connect = false);
     void toPanels(ofImage &canvas, ofImage &panels);
     
     void guiSetup();
