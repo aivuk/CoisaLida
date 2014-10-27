@@ -17,6 +17,7 @@ void ofApp::setup() {
     guiSetup(); //GUI Setup
     
     
+    wordColor = ofColor(colorRed, colorGreen, colorBlue);
     mPanelPositionAndSize = ofRectangle(37,259, 215, 168);
     mCanvas.allocate(mPanelPositionAndSize.width, mPanelPositionAndSize.height, OF_IMAGE_COLOR);
     mPanels.allocate(mPanelPositionAndSize.width, mPanelPositionAndSize.height, OF_IMAGE_COLOR);
@@ -29,13 +30,20 @@ void ofApp::setup() {
 	helvetica.loadFont("HelveticaNeueLTStd-Hv.otf", 14);
 
     player.loadMovie("aviao2.mp4");
-   // player.play();
-
-    //tempFbo.allocate(mCanvas.width, mCanvas.height);
     
+    // Events listeners for time parameters
+    
+    wordTimeMin.addListener(this, &ofApp::updateWordTimeMin);
+    wordTimeMax.addListener(this, &ofApp::updateWordTimeMax);
+    kinectTimeMin.addListener(this, &ofApp::updateKinectTimeMin);
+    kinectTimeMax.addListener(this, &ofApp::updateKinectTimeMax);
+    colorRed.addListener(this, &ofApp::updateColorRed);
+    colorGreen.addListener(this, &ofApp::updateColorGreen);
+    colorBlue.addListener(this, &ofApp::updateColorBlue);
+
     // Create poems
     
-    ofPoem poem1, poem2, poem3;
+    ofPoem poem1, poem2, poem3, poem4, poem5, poem6;
     
     // Poem 1: Alberto Caeiro (F. Pessoa)
     string poemText = "O ESSENCIAL É SABER VER SABER VER SEM ESTAR A PENSAR SABER VER QUANDO SE VÊ E NEM PENSAR QUANDO SE VÊ NEM VER QUANDO SE PENSA";
@@ -63,8 +71,58 @@ void ofApp::setup() {
     poem3.addScript(7, VIDEO, "poema-3/s-Luz piscando.mov");
     poems.push_back(poem3);
     
+    // Poem 4: Camila Nuñez
+    poemText = "É COMO SE FICASSE UM VÃO ENTRE O DIA E A NOITE ENTRE SONHO E VIGÍLIA É POR É POR VIR É POR IR É POR ALGO QUE ESCAPA QUE ESVAI ALI BEM NA SUA FRENTE A OLHO NU SE DESPEDINDO";
+    poem4.setup(poemText);
+    
+    poems.push_back(poem4);
+    
+    // Poem 5: Oscar Wilde
+    poemText = "TODOS NÓS ESTAMOS NA SARJETA MAS ALGUNS DE NÓS OLHAM PARA AS ESTRELAS";
+    poem5.setup(poemText);
+    
+    poems.push_back(poem5);
+
+    // Poem 6: Clarice Lispector (Paixao Segundo GH)
+    poemText = "NÃO COMPREENDO O QUE VI E NEM MESMO SEI SE VI JÁ QUE MEUS OLHOS TERMINARAM NÃO SE DIFERENCIANDO DA COISA VISTA";
+    poem6.setup(poemText);
+    
+    poems.push_back(poem6);
+
+    
     // Start poem 1
     poems[0].start();
+}
+
+void ofApp::updateWordTimeMin(float &time) {
+    wordTimeMin = time;
+}
+
+void ofApp::updateWordTimeMax(float &time) {
+    wordTimeMax = time;
+}
+
+void ofApp::updateKinectTimeMin(float &time) {
+    kinectTimeMin = time;
+}
+
+void ofApp::updateKinectTimeMax(float &time) {
+    kinectTimeMax = time;
+}
+
+void ofApp::updateColorRed(int &r) {
+    colorRed = r;
+    wordColor.set(colorRed, colorGreen, colorBlue);
+}
+
+void ofApp::updateColorGreen(int &g) {
+    colorGreen = g;
+    wordColor.set(colorRed, colorGreen, colorBlue);
+}
+
+void ofApp::updateColorBlue(int &b) {
+    colorBlue = b;
+    wordColor.set(colorRed, colorGreen, colorBlue);
 }
 
 //--------------------------------------------------------------
@@ -73,7 +131,6 @@ void ofApp::update() {
     ofEnableAlphaBlending();
 	ofBackground(255, 255, 255);
     kinectUpdate();
-    cout << velocityAverage << endl;
     
     if (running) {
         if (poems[runningPoem].frame == STOP) {
@@ -86,6 +143,18 @@ void ofApp::update() {
 
 void ofApp::advancePoem() {
     runningPoem = (runningPoem + 1) % poems.size();
+    
+    poems[runningPoem].word_i = 0;
+    poems[runningPoem].start();
+}
+
+void ofApp::backPoem() {
+    runningPoem = (runningPoem - 1);
+    if (runningPoem < 0) {
+        runningPoem = poems.size() - 1;
+    }
+    
+    poems[runningPoem].word_i = 0;
     poems[runningPoem].start();
 }
 
@@ -394,25 +463,35 @@ void ofApp::guiSetup(){
 
     gui.setup("Settings", "settings.xml", 310,100);
 
+    // Kinect parameters
+    
     gui.add(enableMouse.set("Mouse DEBUG",true));
     parametersKinect.setName("Kinect");
-
-
     parametersKinect.add(farThreshold.set("Far Threshold", 0,0, 255 ));
     parametersKinect.add(numMaxBlobs.set("Num Max Blos",10,0,15));
     parametersKinect.add(maxBlobSize.set("max Blob Size",0,0,500));
     parametersKinect.add(minBlobSize.set("min Blob Size",0,0,500));
-
     parametersKinect.add(offsetX.set("Offset X", 0,-200, 200 ));
     parametersKinect.add(offsetY.set("Offset Y", 0,-200, 200 ));
-
-
-
     gui.add(parametersKinect);
 
-
-
+    // Time Parameters
+    
+    parametersTime.setName("Time");
+    parametersTime.add(wordTimeMin.set("Word time min", 500, 500, 5000));
+    parametersTime.add(wordTimeMax.set("Word time max", 1000, 500, 5000));
+    parametersTime.add(kinectTimeMin.set("Kinect time min", 500, 500, 5000));
+    parametersTime.add(kinectTimeMax.set("Kinect time max", 1000, 500, 5000));
+    gui.add(parametersTime);
+    
+    // Visual Parameters
+    
     gui.minimizeAll();
+    parametersVisual.setName("Visual");
+    parametersVisual.add(colorRed.set("Red", 255, 0, 255));
+    parametersVisual.add(colorGreen.set("Gree", 255, 0, 255));
+    parametersVisual.add(colorBlue.set("Blue", 255, 0, 255));
+    gui.add(parametersVisual);
 
     gui.loadFromFile("settings.xml");
 
@@ -428,6 +507,10 @@ void ofApp::keyPressed (int key) {
             running = !running;
             break;
 
+        case 's':
+            gui.saveToFile("settings.xml");
+            break;
+            
         case 'd':
             bDebugMode = !bDebugMode;
             break;
@@ -439,6 +522,13 @@ void ofApp::keyPressed (int key) {
         case 'm':
             running = false;
             poems[runningPoem].advanceWord();
+            break;
+            
+        case 'k':
+            advancePoem();
+            break;
+        case 'l':
+            backPoem();
             break;
 	}
 

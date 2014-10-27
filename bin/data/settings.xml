@@ -55,4 +55,15 @@
 		<min_Noise_Corner>17</min_Noise_Corner>
 		<max_Noise_Corne>77</max_Noise_Corne>
 	</General_Params>
+<Time>
+		<Word_time_min>500</Word_time_min>
+		<Word_time_max>1000</Word_time_max>
+		<Kinect_time_min>500</Kinect_time_min>
+		<Kinect_time_max>1000</Kinect_time_max>
+	</Time>
+	<Visual>
+		<Red>255</Red>
+		<Gree>134</Gree>
+		<Blue>255</Blue>
+	</Visual>
 </Settings>

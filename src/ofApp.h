@@ -20,6 +20,7 @@ public:
     void drawKinect();
 	void drawPointCloud();
     void advancePoem();
+    void backPoem();
 	void keyPressed(int key);
 	void mouseDragged(int x, int y, int button);
 	void mousePressed(int x, int y, int button);
@@ -41,14 +42,24 @@ public:
     void kinectUpdateAreaH(int& kinectHeight);
     void kinectVelocities();
     
+    void updateWordTimeMin(float &time);
+    void updateWordTimeMax(float &time);
+    void updateKinectTimeMin(float &time);
+    void updateKinectTimeMax(float &time);
+    void updateColorRed(int &r);
+    void updateColorGreen(int &g);
+    void updateColorBlue(int &b);
+    
     // blob Offset detais
     float applyOffsetX(float _x);
     float applyOffsetY(float _y);
 
     float velocityAverage = 0;
-    float wordTimeMax = 1000;
-    float kinectTimeMax = 2000;
-    
+    ofParameter<float> wordTimeMin = 500;
+    ofParameter<float> wordTimeMax = 1000;
+    ofParameter<float> kinectTimeMin = 500;
+    ofParameter<float> kinectTimeMax = 2000;
+
 	ofxKinect kinect;
     ofxSyphonServer syphonServer;
     ofxCv::ContourFinder contourFinder;
@@ -62,9 +73,9 @@ public:
     //GUI
     ofxPanel gui; 
 
-    ofParameterGroup parametersKinect;
+    ofParameterGroup parametersKinect, parametersTime, parametersVisual;
     
-
+    
     ofParameter<bool> enableMouse;
     ofParameter<int> farThreshold = 143;
     ofParameter<float> offsetX;
@@ -73,6 +84,13 @@ public:
     ofParameter<int> minBlobSize = 22;
     ofParameter<int> maxBlobSize = 354;
 
+    
+    ofParameter<int> colorRed;
+    ofParameter<int> colorGreen;
+    ofParameter<int> colorBlue;
+    
+    ofColor wordColor;
+    
     ofxTrueTypeFontUC helvetica;
     bool running = true;
     ofVideoPlayer player;

@@ -35,13 +35,34 @@ void ofPoem::start() {
 
 void ofPoem::update() {
     unsigned long long now = ofGetElapsedTimeMillis();
+    float wordTimeMin = ((ofApp*)ofGetAppPtr())->wordTimeMin;
     float wordTimeMax = ((ofApp*)ofGetAppPtr())->wordTimeMax;
+    float kinectTimeMin = ((ofApp*)ofGetAppPtr())->kinectTimeMin;
     float kinectTimeMax = ((ofApp*)ofGetAppPtr())->kinectTimeMax;
     float velocityAverage = ((ofApp*)ofGetAppPtr())->velocityAverage;
-    
-    wordTimeMax *= (1 - velocityAverage/10);
-    kinectTimeMax *= (1 - velocityAverage/10);
 
+    float newWordTimeMax = (1 - velocityAverage/20)*wordTimeMax;
+    
+   // cout << "NEW " << newWordTimeMax << endl;
+    
+    if (newWordTimeMax < wordTimeMin) {
+        wordTimeMax = wordTimeMin;
+    }
+    
+    if (newWordTimeMax < wordTimeMax) {
+        wordTimeMax = newWordTimeMax;
+    }
+    
+    float newKinectTimeMax = (1 - velocityAverage/20)*kinectTimeMax;
+
+    if (newKinectTimeMax < kinectTimeMin) {
+        kinectTimeMax = kinectTimeMin;
+    }
+    
+    if (newKinectTimeMax < kinectTimeMax) {
+        kinectTimeMax = newKinectTimeMax;
+    }
+    
     switch (frame) {
         case WORD:
             if (now - wordTime > wordTimeMax) {
@@ -142,6 +163,7 @@ void ofPoem::draw() {
 
 void ofPoem::drawWord(string word) {
     ofRectangle r;
+    ofColor wordColor = ((ofApp*)ofGetAppPtr())->wordColor;
     int i = 0;
     int len = ofUTF8::distance(word);
     int word_height = len*15 + 5;
@@ -175,7 +197,7 @@ void ofPoem::drawWord(string word) {
     while (iter != stop) {
         ofUniChar c = ofUTF8::getNext(iter);
         ofPushStyle();
-        ofSetColor(255);
+        ofSetColor(wordColor);
         //cout << ofTextConverter::toUTF8(c) << " " << r.getWidth() << endl ;
 
         // Left
