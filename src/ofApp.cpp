@@ -8,6 +8,7 @@ using namespace ofxCv;
 
 //--------------------------------------------------------------
 void ofApp::setup() {
+    float vmax = 0;
     ofTrueTypeFont::setGlobalDpi(72);
     
     
@@ -72,6 +73,7 @@ void ofApp::update() {
     ofEnableAlphaBlending();
 	ofBackground(255, 255, 255);
     kinectUpdate();
+    cout << velocityAverage << endl;
     
     if (running) {
         if (poems[runningPoem].frame == STOP) {
@@ -126,11 +128,20 @@ void ofApp::draw() {
 
 }
 
+void ofApp::kinectVelocities() {
+    velocityAverage = 0;
+    int countoursNum = contourFinder.size();
+    for(int i=0; i < countoursNum; i++){
+        ofVec2f velocity = toOf(contourFinder.getVelocity(i));
+        velocityAverage += velocity.length();
+    }
+    velocityAverage /= countoursNum;
+}
 
 ///DEBUG-MODE
 
-void ofApp::debugMode(){
-
+void ofApp  ::debugMode(){
+    
     ofPushMatrix();
 
         ofTranslate(400,400);
@@ -334,6 +345,7 @@ void ofApp::kinectUpdate(){
         contourFinder.setMaxAreaRadius(maxBlobSize);
         contourFinder.findContours(grayImage);
 
+        kinectVelocities();
     }
 
 }

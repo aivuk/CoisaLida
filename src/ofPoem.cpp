@@ -35,11 +35,16 @@ void ofPoem::start() {
 
 void ofPoem::update() {
     unsigned long long now = ofGetElapsedTimeMillis();
-
+    float wordTimeMax = ((ofApp*)ofGetAppPtr())->wordTimeMax;
+    float kinectTimeMax = ((ofApp*)ofGetAppPtr())->kinectTimeMax;
+    float velocityAverage = ((ofApp*)ofGetAppPtr())->velocityAverage;
     
+    wordTimeMax *= (1 - velocityAverage/10);
+    kinectTimeMax *= (1 - velocityAverage/10);
+
     switch (frame) {
         case WORD:
-            if (now - wordTime > 100) {
+            if (now - wordTime > wordTimeMax) {
                 if (script.count(word_i) > 0) {
                     frame = script[word_i];
                     wordTime = now;
@@ -68,7 +73,7 @@ void ofPoem::update() {
             }
             break;
         case KINECT:
-            if (now - wordTime > 10000) {
+            if (now - wordTime > kinectTimeMax) {
                 wordTime = now;
                 played = true;
                 advanceWord();

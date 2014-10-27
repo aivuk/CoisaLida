@@ -39,13 +39,15 @@ public:
     //gui Change events
     void kinectUpdateAreaW(int& kinectWidth);
     void kinectUpdateAreaH(int& kinectHeight);
-    
+    void kinectVelocities();
     
     // blob Offset detais
     float applyOffsetX(float _x);
     float applyOffsetY(float _y);
 
-
+    float velocityAverage = 0;
+    float wordTimeMax = 1000;
+    float kinectTimeMax = 2000;
     
 	ofxKinect kinect;
     ofxSyphonServer syphonServer;
